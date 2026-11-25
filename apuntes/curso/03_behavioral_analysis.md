@@ -1,5 +1,7 @@
 # Lecture 3: Behavioral Analysis
 
+> **Actualización:** la notebook está ejecutada en Colab (A100) y tiene las respuestas escritas. Para que funcionara se cambiaron dos celdas. La de instalación instala primero torch y transformers 4.51.3 y después flash-attn con `--no-build-isolation`. La de carga del modelo pone `config.rope_scaling = None`, porque el código remoto de Phi-3-small falla con el `rope_scaling` que rellena transformers. Resultados: 47.0 % de accuracy original, 45.3 % con las letras revueltas y 10/25 en las variantes numéricas.
+
 Esta notebook es sobre evaluar a un LLM **desde afuera**, sin mirar sus internals, pero de una forma más inteligente que reportar un número de accuracy. Toma un benchmark de opción múltiple (MMLU, temas de matemática), evalúa a `microsoft/Phi-3-small-8k-instruct` de la forma estándar (5-shot, comparando las probabilidades de las letras A/B/C/D) y después le aplica **stress tests**: cambios controlados en el input que o bien *no deberían* cambiar la respuesta (permutar opciones, cambiar letras) o bien *sí deberían* (cambiar un número del enunciado y recalcular la respuesta). La pregunta que responde es: cuando el modelo acierta, ¿está razonando o está recordando pares pregunta-respuesta que vio en el preentrenamiento? El cierre es un **probe de memorización**: se mete la respuesta original como distractor en las variantes y se mide cuántas veces el modelo la elige aunque ya no sea correcta.
 
 ---

@@ -66,6 +66,6 @@ Lo que no se pudo comprobar sin ejecutar (no había torch/pyvene a mano) está m
 
 - **Tareas de causalab actualizadas**: IOI, entity binding y general addition se portaron a la API actual de `causalab` y sus notebooks corren completas (salvo la 02 de general addition, que necesita tokenizers con acceso restringido de Gemma y Llama). Varios apuntes de esas tareas se escribieron antes del port: cada uno tiene una nota al principio con lo que cambió.
 - **Demos 05 y 06**: se corrigió el guardado del dataset. Las demos 02 a 07 usan `meta-llama/Llama-3.2-1B-Instruct`, que necesita aceptar la licencia en Hugging Face y un token.
-- **Notebooks del curso ejecutadas**: la 02, 04, 06 y 07 están ejecutadas en GPU y tienen las respuestas escritas. La 03 se corre en Colab, porque su modelo (7B) no entra en 8 GB de GPU.
+- **Notebooks del curso ejecutadas**: la 02, 04, 06 y 07 están ejecutadas en GPU y tienen las respuestas escritas. La 03 está ejecutada en Colab (A100) y también tiene sus respuestas.
 - **Notebook 10 automatizada**: llama a scripts de una carpeta `causalab-internal` que no está en ningún repo, así que solo se puede leer.
 - **pyvene** no está incluido en el repo; donde el código depende de su comportamiento interno, los apuntes lo marcan.

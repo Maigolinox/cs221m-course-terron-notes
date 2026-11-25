@@ -36,7 +36,7 @@ En Colab, la primera celda de cada notebook clona este repo e instala los requis
 - **02, 04, 06 y 07**: ejecutadas en una RTX 4060, con los ejercicios de código resueltos y las preguntas respondidas en español.
   - En la 04 no se ejecutaron las celdas que usan NDIF (requieren API key).
   - En la 06 no se ejecutó la sección de ReFT, porque instala `pyreft` y cambia la versión de transformers.
-- **03**: se ejecuta en Colab, porque su modelo (Phi-3-small, 7B) no entra en 8 GB de GPU.
+- **03**: ejecutada en Colab (A100), porque su modelo (Phi-3-small, 7B) no entra en 8 GB de GPU. La celda de instalación y la de carga del modelo tienen ajustes para que funcione en Colab: flash-attn se instala en dos pasos y se pone `rope_scaling = None`. Preguntas respondidas.
 - **08, 09, 10 y extra**: conservan las salidas originales del curso.
 - **`causalab/`**: las tareas (entity binding, general addition, IOI) y sus notebooks se portaron a la API actual de la librería y corren completas.
 
