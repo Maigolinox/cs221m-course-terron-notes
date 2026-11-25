@@ -1,5 +1,13 @@
 # General addition 03: variables de acarreo, contrafactuales y cascadas
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Notebook: `causalab/causalab/tasks/general_addition/notebooks/03_counterfactuals_and_carry_variables.ipynb`
 
 Esta notebook trabaja solo con el **modelo causal intermedio** de la suma de 3 dígitos (variables de acarreo `C_1, C_2, C_3` y dígitos de salida `O_1..O_4`). Primero muestra cómo se propagan los acarreos y qué pasa al intervenirlos; después construye dos datasets contrafactuales (**aleatorio** y **sum-to-nine**) y mide con `can_distinguish_with_dataset` cuánto permite cada uno distinguir `C_1` de otras variables. La pregunta: ¿qué pares de entradas hacen visible el efecto de un acarreo, y cómo se ve una **cascada** de acarreos (forzar `C_1 = 1` cambia `C_2` y `C_3`)?

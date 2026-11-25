@@ -1,5 +1,13 @@
 # General addition 02: token positions para dígitos (Llama vs Gemma)
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Notebook: `causalab/causalab/tasks/general_addition/notebooks/02_token_positions_for_digits.ipynb`
 
 Para intervenir "el dígito de las decenas de 23" en un LM hay que saber **qué token** contiene ese dígito, y eso depende del tokenizer. Esta notebook compara dos modelos: **Llama 3.1 8B Instruct**, que tokeniza números enteros como un solo token (hasta 3 dígitos), y **Gemma 2 9B**, que tokeniza dígito por dígito. Luego usa las funciones de `tasks/general_addition/token_positions.py` para construir los `TokenPosition` que usarían los experimentos. La pregunta que responde: ¿qué estoy interviniendo realmente cuando digo "intervengo `digit_0_1`" en cada modelo?

@@ -1,5 +1,13 @@
 # General addition 01: la tarea de suma y sus dos modelos causales
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Notebook: `causalab/causalab/tasks/general_addition/notebooks/01_addition_task_and_causal_models.ipynb`
 
 Esta notebook construye la tarea de **suma de varios dígitos** para experimentos de causal abstraction: prompts como *"The sum of 23 and 45 is"* que el LM debería completar con *" 68"*. Define la configuración (K números de D dígitos), el procesamiento de plantillas, y dos **modelos causales** que representan dos hipótesis sobre cómo se computa la suma: uno **básico** (entradas → dígitos de salida, sin nada en el medio) y uno **intermedio** con variables explícitas de **acarreo** (carry) `C_i` y dígitos de salida `O_i`. La pregunta que responde: ¿cómo se escribe "la suma con acarreos" como grafo causal, y qué pasa si intervengo un acarreo?

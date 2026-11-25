@@ -1,5 +1,13 @@
 # Entity binding 01: la tarea y su modelo causal
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Notebook: `causalab/causalab/tasks/entity_binding/notebooks/01_task_and_causal_model.ipynb`
 
 Esta notebook construye, pieza por pieza, la tarea de **entity binding** ("ligado de entidades"): prompts del tipo *"Pete loves jam, and Ann loves pie. What does Pete love?"*, donde el modelo tiene que recuperar la entidad que está **ligada** (en el mismo grupo) a la entidad por la que se pregunta. La pregunta que responde es: ¿cómo representamos esta tarea de forma abstracta (configuración, matriz de ligados, plantillas) y cómo la convertimos en un **modelo causal** de causalab que genera el prompt (`raw_input`) y la respuesta correcta (`raw_output`)? Todavía no hay red neuronal: todo es simbólico.

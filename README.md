@@ -22,12 +22,23 @@ Mis notas y versiones modificadas de notebooks sobre interpretabilidad mecanicis
 Requiere Python 3.12 y [uv](https://docs.astral.sh/uv/).
 
 ```bash
-git clone https://github.com/Maigolinox/interpretabilidad.git
-cd interpretabilidad
+git clone https://github.com/Maigolinox/cs221m-course-terron-notes.git
+cd cs221m-course-terron-notes
 uv sync
 ```
 
+`uv sync` crea `.venv` con torch compilado para CUDA 13.0 en Windows y Linux (ver `[tool.uv.index]` en `pyproject.toml`), así que las notebooks usan la GPU si hay una NVIDIA. En macOS instala la versión normal de torch.
+
 En Colab, la primera celda de cada notebook clona este repo e instala los requisitos de `requirements/`.
+
+## Estado de las notebooks
+
+- **02, 04, 06 y 07**: ejecutadas en una RTX 4060, con los ejercicios de código resueltos y las preguntas respondidas en español.
+  - En la 04 no se ejecutaron las celdas que usan NDIF (requieren API key).
+  - En la 06 no se ejecutó la sección de ReFT, porque instala `pyreft` y cambia la versión de transformers.
+- **03**: se ejecuta en Colab, porque su modelo (Phi-3-small, 7B) no entra en 8 GB de GPU.
+- **08, 09, 10 y extra**: conservan las salidas originales del curso.
+- **`causalab/`**: las tareas (entity binding, general addition, IOI) y sus notebooks se portaron a la API actual de la librería y corren completas.
 
 ## Estructura
 

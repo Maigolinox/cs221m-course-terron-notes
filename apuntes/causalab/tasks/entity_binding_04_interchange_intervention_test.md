@@ -1,5 +1,13 @@
 # Entity binding 04: interchange interventions sobre variables `positional_entity`
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Notebook: `causalab/causalab/tasks/entity_binding/notebooks/04_interchange_intervention_test.ipynb`
 
 Esta notebook usa un tercer modelo causal, el **positional entity model** (`create_positional_entity_causal_model`), que hace explícito "en qué grupo está cada entidad" con una variable por celda (`positional_entity_g{g}_e{e}`). Luego prueba interchange interventions con la sintaxis de flecha (`"A<-B"`: poner en `A` de la base el valor de `B` del contrafactual) y mide distinguibilidad. La pregunta que intenta responder: si esas variables parecen triviales en el modelo causal (siempre valen el índice del grupo), ¿tiene sentido intervenirlas, y qué testean en una red neuronal?

@@ -1,5 +1,7 @@
 # 06 — Boundless DAS: rotación y máscara por dimensión aprendidas juntas (`06_boundless_DAS.ipynb`)
 
+> **Actualización (noviembre 2026):** se corrigió el guardado del dataset: ahora se escribe en un archivo `.json` en lugar de en una carpeta. El problema de "Ojo" sobre `save_counterfactual_examples` ya está resuelto.
+
 Notebook: `causalab/demos/onboarding_tutorial/06_boundless_DAS.ipynb`.
 
 Sexta notebook del onboarding. Junta las dos ideas de la 04 ([04_train_DAS_and_DBM.md](04_train_DAS_and_DBM.md)) y la 05 ([05_PCA_DBM_DAS.md](05_PCA_DBM_DAS.md)):

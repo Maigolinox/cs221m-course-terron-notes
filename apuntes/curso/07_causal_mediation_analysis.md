@@ -1,5 +1,7 @@
 # Lecture 7: Causal Mediation Analysis
 
+> **Actualización:** el modelo se carga con `attn_implementation="eager"` (ver la nota de la 02). La notebook ya está ejecutada y tiene las respuestas escritas.
+
 Esta notebook pasa de "mirar" adentro del modelo (logit lens, probes) a **intervenir** adentro del modelo de forma sistemática. La pregunta central es: cuando cambio un pedacito del input (por ejemplo "Eiffel" por "Tokyo") y la predicción cambia ("France" por "Japan"), ¿por qué componentes internos pasa ese cambio, en qué capa y en qué token? La herramienta es la **causal mediation analysis**: hacer una **interchange intervention** (copiar una activación de una corrida "source" a una corrida "base") en cada componente, uno por uno, y medir cuánto se mueve la predicción. Con eso se arma un mapa capa × token del flujo de información, se identifica la cabeza de atención que mueve la información entre tokens, se mira cómo el modelo trackea el estado de un objeto a lo largo de un texto y, al final, se combinan dos intervenciones para obtener un efecto composicional ("Tokyo").
 
 Modelo: `HuggingFaceTB/SmolLM2-360M` (32 capas, 15 cabezas de atención por capa), manejado con `nnsight` (versión fijada en `requirements/07_causal_mediation_analysis.txt`: `nnsight==0.5.15`).

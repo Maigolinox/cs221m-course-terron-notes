@@ -1,5 +1,13 @@
 # causalab/tasks: las tareas concretas
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Cada tarea es un "plugin" que define tres cosas: el **modelo causal** de alto nivel (qué algoritmo creemos que implementa el LM), los **generadores de contrafactuales** (qué pares base/contrafactual permiten distinguir hipótesis) y las **token positions** (en qué tokens del prompt buscar las variables). Este archivo recorre las cuatro tareas que hay en `causalab/causalab/tasks/`.
 
 El `__init__.py` de `tasks/` lo dice explícitamente:

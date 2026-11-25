@@ -1,5 +1,15 @@
 # IOI demo: Indirect Object Identification con causalab
 
+> **Actualización (noviembre 2026):** la notebook se reescribió con la API actual y corre completa en GPU:
+> - filtrado con `filter_dataset`;
+> - parcheo de cabezas con `build_attention_head_targets` + `run_interchange_interventions`;
+> - diferencia de logits calculada con los logits completos (y el espacio inicial correcto en los dos nombres);
+> - DBM con `train_DBM_binary_heatmaps`;
+> - los contrafactuales conservan plantilla, lugar y objeto del base;
+> - el coeficiente de regularización de DBM pasó de 0.1 a 10 para que la máscara seleccione pocas cabezas con el mismo IIA.
+>
+> Resultados de la ejecución: las cabezas con más efecto en la diferencia de logits son 8.6, 8.10, 7.9 y 7.3, las *S-inhibition heads* de Wang et al. (2023).
+
 Notebook: `causalab/causalab/tasks/IOI/ioi_demo.ipynb`
 
 **IOI** (Indirect Object Identification) es la tarea clásica de interpretabilidad de GPT-2 small: en *"As Christopher and Kevin left the restaurant, Kevin gave a ring to"* el modelo debería continuar con *" Christopher"*, el **objeto indirecto** (IO), es decir, el nombre que **no** se repite. Al nombre repetido se le llama sujeto (S). Esta notebook define un modelo causal de alto nivel de la tarea con dos variables intermedias, **`output_position`** (en qué posición estaba el IO: primero o segundo nombre) y **`output_token`** (qué nombre es el IO), genera varios datasets contrafactuales, filtra los ejemplos que GPT-2 resuelve bien, hace **activation patching por cabeza de atención** en el último token y entrena máscaras **DBM** (Desiderata-Based Masking) para encontrar qué cabezas cargan esas variables (las *name mover heads* y, según el título de la sección, *negative name mover heads*). La pregunta: ¿qué cabezas de atención de GPT-2, leídas en el último token, implementan las variables del modelo causal de IOI?

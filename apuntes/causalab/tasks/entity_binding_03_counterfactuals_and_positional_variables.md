@@ -1,5 +1,13 @@
 # Entity binding 03: contrafactuales y el modelo posicional
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Notebook: `causalab/causalab/tasks/entity_binding/notebooks/03_counterfactuals_and_positional_variables.ipynb`
 
 Esta notebook plantea dos **hipótesis causales** sobre cómo un LM responde *"Pete loves jam, Ann loves pie, and Bob loves cake. What does Ann love?"*, las escribe como dos modelos causales distintos (**directo** y **posicional**) y muestra cómo construir **datasets contrafactuales** (pares base/contrafactual) que permitan distinguir esas hipótesis mediante interchange interventions. La pregunta que responde: ¿qué variables intermedias propone cada hipótesis y qué tipo de contrafactual hace que "intervenir la variable X" y "intervenir la variable Y" den resultados distintos?

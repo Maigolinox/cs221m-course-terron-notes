@@ -1,5 +1,7 @@
 # 05 — PCA como análisis no supervisado y como featurizer para DAS y DBM (`05_PCA_DBM_DAS.ipynb`)
 
+> **Actualización (noviembre 2026):** se corrigió el guardado del dataset: ahora se escribe en un archivo `.json` en lugar de en una carpeta. El problema de "Ojo" sobre `save_counterfactual_examples` ya está resuelto.
+
 Notebook: `causalab/demos/onboarding_tutorial/05_PCA_DBM_DAS.ipynb`.
 
 Quinta notebook del onboarding. Hasta la 04 ([04_train_DAS_and_DBM.md](04_train_DAS_and_DBM.md)) todo fue **supervisado** por el modelo causal. Acá se agrega un método **no supervisado**: recolectar activaciones del residual stream (capa 10, último token, que en la 04 resultó ser el mejor lugar para `answer_position`) y hacer PCA/SVD para ver si los inputs se agrupan según las variables causales. Después se usa PCA de dos formas como **featurizer** (una base de coordenadas para intervenir):

@@ -1,5 +1,13 @@
 # Entity binding 02: token positions conscientes de la plantilla
 
+> **Actualización (noviembre 2026):** esta tarea ya corre con la versión de `causalab` incluida en el repo. Cambios principales:
+> - el modelo causal se construye con objetos `Mechanism`, la API actual de `CausalModel`;
+> - los generadores de contrafactuales devuelven `CausalTrace` y aceptan `model=` para armar los traces con el modelo que se analiza;
+> - los datasets son listas simples, no `CounterfactualDataset.from_sampler`;
+> - se restauró `statement_conjunction_function`.
+>
+> Lo que abajo se describe como "no corre" o "API vieja" ya está resuelto. La explicación de las ideas sigue valiendo.
+
 Notebook: `causalab/causalab/tasks/entity_binding/notebooks/02_token_positions_demo.ipynb`
 
 Para hacer una interchange intervention en un transformer hay que decir **dónde** intervenir: en qué capa y en qué **posición de token**. Esta notebook muestra el sistema de token positions de la tarea entity binding, que resuelve un problema concreto: en *"Pete loves jam, and Ann loves pie. What does Pete love?"* el nombre "Pete" aparece **dos veces** (en el enunciado y en la pregunta), y buscar el substring "Pete" sin más siempre devolvería la primera aparición. La solución es **parsear el prompt usando las plantillas** que lo generaron, de modo que cada trozo de texto sabe qué es (entidad, texto de plantilla, delimitador, texto de pregunta), a qué grupo/rol pertenece y en qué región está (enunciado o pregunta). La pregunta que responde la notebook: ¿cómo obtengo los índices de token exactos de "la entidad g, e en la región R"?

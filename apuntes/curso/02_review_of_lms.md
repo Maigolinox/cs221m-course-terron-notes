@@ -1,5 +1,7 @@
 # Lecture 2: Review of Language Models
 
+> **Actualización:** el modelo se carga con `attn_implementation="eager"`. Con transformers 5 (la versión del `.venv` local), cambiar `model.config._attn_implementation` después de cargar no devuelve los mapas de atención. La notebook ya está ejecutada y tiene las respuestas escritas.
+
 Esta notebook es un repaso de cómo funciona un language model (LM), pero pensado desde la interpretabilidad: no le interesa tanto por qué el transformer se diseñó así, sino qué función computacional cumple cada pieza. Va "pelando capas" de a una: primero el modelo como caja negra (GPT-2 generando texto), después qué entra y qué sale (tokens y logits), y al final el interior: residual stream, MLP y attention, con `nnsight` para mirar activaciones. La pregunta de fondo es: ¿por dónde viaja la información dentro del modelo y qué componente hace qué? La respuesta que deja la notebook es "las MLP guardan y procesan información de cada token, la attention es lo único que mueve información entre tokens, y todo fluye de izquierda a derecha".
 
 ---

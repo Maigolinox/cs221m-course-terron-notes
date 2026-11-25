@@ -1,5 +1,7 @@
 # Lecture 4: Decodificar información en modelos de lenguaje (probes y steering)
 
+> **Actualización:** el Ejercicio 2 ahora usa `"English: hello, Espanol:"`, que sí queda clasificado como francés por la PCA; los préstamos del francés acercan el punto pero no cruzan. La notebook ya está ejecutada y tiene las respuestas escritas.
+
 Esta notebook es el primer contacto con los "internos" del modelo. La pregunta de fondo es doble: **¿qué información podemos leer de las activaciones intermedias de un LM?** (probing) y **¿podemos usar lo que leemos para controlar lo que hace el modelo?** (steering). Recorre tres formas lineales de "mirar" las activaciones (logit lens, PCA, probes supervisados), después hace un desvío conceptual sobre correlación vs. causalidad con un ejemplo de juguete (Prof. X), y termina usando **difference-in-means** para hacer que el modelo hable en francés (localmente, con SmolLM2-1.7B) o en emojis (remotamente, con Gemma-2-9B vía NDIF).
 
 ---

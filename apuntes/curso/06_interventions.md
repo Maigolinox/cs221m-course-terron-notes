@@ -1,5 +1,7 @@
 # Lecture 6: Intervenciones sobre redes neuronales
 
+> **Actualización:** la solución del Ejercicio 1 importa `torch`, que esa celda necesitaba. La notebook ya está ejecutada (sin la sección de ReFT, que instala `pyreft`) y tiene las respuestas escritas.
+
 Si la Lecture 4 preguntaba "¿qué podemos **leer** de las activaciones?", esta pregunta "¿qué pasa si las **cambiamos**?". La notebook recorre tres familias de intervenciones: **ablations** (sacar información, con INLP para quitar un sesgo de género en OLMo-2-1B), **interchange interventions** (cambiar activaciones entre inputs para descubrir qué componente es causalmente relevante, usando una red de juguete que calcula el máximo de dos números) y **steering** entrenado (ReFT/LoReFT con `pyreft`, para que TinyLlama responda en emojis). El hilo conductor es que toda intervención externa hace supuestos sobre cómo el modelo representa la información (por ejemplo, "0 significa nada" o "la información es lineal"), y esos supuestos pueden fallar.
 
 ---
