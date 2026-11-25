@@ -1,0 +1,27 @@
+Last week, we systematically explored interchange interventions. **Causal mediation analysis** asks how much of a model’s behavior flows through one internal component (the **mediator**). To understand this, we patched that component with its value from a contrasting input and measured how much the output changed. Working with SmolLM2-360M on the “Eiffel Tower is in the country of” and “Tokyo Tower is in the country of” examples from the notebook, we scored each patch by how far it moved the **log odds** of “France” over “Japan”. The logit lens had already shown the country emerging around layers 26 and 27. But as we saw in Lecture 4, being able to decode a value at a layer does not necessarily mean the model actually *uses* it there, so we needed to patch every layer at every token position to confirm.
+
+The result was a map of where the relevant information was stored and how it flowed through the model. More specifically, information about the Eiffel Tower stayed at “Eiffel” in the early layers, then moved to the final token around layer 26. In this sort of analysis, we can also choose a finer **mediator**. Each attention layer is made of several heads that pull information from other tokens. Swapping one head’s output at a time showed that just a single head was responsible for moving this information to the final token! Finally, interventions can be combined. Patching from the Tokyo prompt and from “Eiffel Tower is in the city of” at once made the model answer “Tokyo”, which neither source prompt answers on its own (they answer “Japan” and “Paris”), so the patches must have carried abstract variables: which monument *and* which attribute.
+
+Mediation tells us *where* information flows, and Lecture 8 shifted our focus to what *role* information plays. **Causal abstraction** describes both a step-by-step algorithm and a neural network as **causal models**: directed acyclic graphs whose nodes are variables, each getting its value from a **mechanism** (a function of its parents, which are the variables with edges into it!). Intervening to fix one variable therefore changes everything downstream, which gives us a way to compare the two. For the network, the variables are its neurons, so we can ask whether each of the algorithm’s variables corresponds to some group of them. 
+
+Our example algorithm from the notebook read four letters and decided whether its two pairs follow the same pattern (the **hierarchical equality task**: AABB and ABCD do, ABCC does not), first checking each pair and then comparing the two answers. To test that correspondence, an **alignment** maps each variable of the algorithm to a set of the network’s neurons. We verify an alignment with interchange interventions: if it is right, replacing those neurons’ values with their values from another input should change the network’s output exactly as the algorithm predicts. **Interchange intervention accuracy (IIA)** (a key metric and often the y-axis on mechanistic interpretability result graphs, alongside layers as the x-axis!) is the fraction of input pairs on which this holds. The correct alignment scored a perfect 1.0, while moving a single neuron into the wrong group dropped it to about 0.85, so IIA is sensitive to the network’s actual structure!
+
+This week closes out the core material of the course. Since an IIA score is only as informative as the input pairs that produce it, Lecture 9 on **counterfactual design** provides guidance on how to choose pairs that most effectively test a variable; these are singular pairs that directly change it as well as the output the algorithm predicts, and which cannot be explained equally well by a competing variable. Lecture 10 then drops the assumption that each variable is aligned with a disjoint set of neurons (which we made so far!). Neurons in language models are often **polysemantic** (just like polysemous words! each refers to several unrelated concepts), so **distributed alignment search (DAS)** looks for variables along learned directions in activation space, and we will use it to test whether an intervention can change one attribute of an entity, like the country of Paris, while leaving the others intact. From week 6 onward, the course turns to guest lectures and final projects, where you will bring these methods to questions of your own!
+
+---
+
+**What we learned from last week’s notebooks**
+
+*Causal mediation analysis*
+
+* **Causal mediation analysis**: intervening on each model component to measure its causal effect on model output.
+* **Tracing information flow**: how to read and interpret plots that trace the flow of information in the model when processing a specific input.
+* **Entity binding**: an initial glimpse into how models track state and compute relations between two entities in context.
+* **Composition of interventions**: how applying interventions from multiple sources can help us identify more fine-grained concepts in the model’s activations.
+
+*Theory of causal abstraction*
+
+* **Algorithms as causal models**: understand algorithms as causal models with variables, values, and mechanisms.
+* **Neural networks as causal models**: understand neural networks as causal models with variables, values, and mechanisms.
+* **Interchange interventions**: interventions that simulate the value a variable would have taken if a different input were provided.
+* **Causal abstraction as implementation**: understand implementation as causal abstraction, where an algorithm is implemented when it abstracts the underlying system.
